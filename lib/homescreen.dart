@@ -94,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
               if(value == 1) {
                 DatabaseRepository.instance.deleteAll().then((value) {
                   ScaffoldMessenger.of(context)
-                      .showSnackBar(const SnackBar(content: Text('All ToDo\'s deleted Successfully')));
+                      .showSnackBar(const SnackBar(content: Text('All Todo\'s deleted Successfully')));
                   setState(() {
                     getTodos();
                   });
