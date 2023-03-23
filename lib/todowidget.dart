@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/addtodo.dart';
-import 'package:todo_app/app_theme/theme_data.dart';
 import 'package:todo_app/todomodel.dart';
 
 class TodoWidget extends StatelessWidget {
@@ -28,7 +27,10 @@ class TodoWidget extends StatelessWidget {
                     // Close the dialog
                     Navigator.of(context).pop();
                   },
-                  child: Text('No', style: Theme.of(context).textTheme.displaySmall,)),
+                  child: Text(
+                    'No',
+                    style: Theme.of(context).textTheme.displaySmall,
+                  )),
               // The yes button
               TextButton(
                   onPressed: () {
@@ -37,7 +39,10 @@ class TodoWidget extends StatelessWidget {
                       Navigator.of(context).pop();
                     }
                   },
-                  child: Text('Yes',style: Theme.of(context).textTheme.displaySmall,)),
+                  child: Text(
+                    'Yes',
+                    style: Theme.of(context).textTheme.displaySmall,
+                  )),
             ],
           );
         });
@@ -45,83 +50,66 @@ class TodoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.topRight,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 105, right: 20),
-            child: todomodel.isImportant? Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Icon(Icons.warning_amber_sharp, size: 16,
-                    color: Colors.red.withOpacity(0.7)
-                ),
-                Text('Important', style: TextStyle(color: Colors.red.withOpacity(0.7)),)
-              ],
-            ):
-                const SizedBox(),
+    final brightness = MediaQuery.of(context).platformBrightness;
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: todomodel.isImportant
+              ? Colors.red.withOpacity(0.1)
+              : Colors.grey.withOpacity(0.1)),
+      child: ListTile(
+        leading: IconButton(
+          enableFeedback: false,
+          onPressed: () => _deleteAsking(context, todomodel),
+          icon: Icon(
+            Icons.delete_outline_sharp,
+            color: Colors.red.withOpacity(0.7),
           ),
-      Container(
-        width: double.infinity,
-        padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: todomodel.isImportant? Colors.red.withOpacity(0.1) :Colors.grey.withOpacity(0.1)),
-        child: ListTile(
-          title: Text(
-            todomodel.title,
-            style: const TextStyle(
-                fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          subtitle: Text(
-            todomodel.description,
-            style: const TextStyle(fontSize: 14),
-          ),
-          trailing: const SizedBox(),
+          // Icon(
+          //   todomodel.isImportant
+          //       ? Icons.warning_amber_sharp
+          //       : Icons.check_box_rounded,
+          //   size: 25,
+          //   color: todomodel.isImportant
+          //       ? Colors.red.withOpacity(0.7)
+          //       : Colors.green.withOpacity(0.7),
         ),
-      ),
-      Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          IconButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => AddTodoScreen(
-                              toDoModel: todomodel,
-                              buttonName: 'Update Todo',
-                              updateCallBackFunction: updateCallBack,
-                            )));
-              },
-              icon: Icon(
-                Icons.edit_calendar,
-                color: Colors.green.withOpacity(0.7),
-              )),
-          IconButton(
-            enableFeedback: false,
-            onPressed: () => _deleteAsking(context, todomodel),
-            icon: Icon(
-              Icons.delete_outline_sharp,
-              color: Colors.red.withOpacity(0.7),
+        title: Text(
+          todomodel.title,
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,
+          color: brightness == Brightness.dark? Colors.white.withOpacity(0.8): Colors.grey.shade700,
+          ),
+        ),
+        subtitle: RichText(
+
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          text: TextSpan(
+            text: todomodel.description,
+            style: TextStyle(fontSize: 14,
+                color: brightness == Brightness.dark? Colors.white60: Colors.grey.shade700,
             ),
           ),
-        ],
-      )
-    ]);
+        ),
+        trailing: IconButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AddTodoScreen(
+                            toDoModel: todomodel,
+                            buttonName: 'Update Todo',
+                            updateCallBackFunction: updateCallBack,
+                          )));
+            },
+            icon: Icon(
+              Icons.edit_calendar,
+              color: Colors.green.withOpacity(0.7),
+              size: 25,
+            )),
+      ),
+    );
   }
 }
-// IconButton(
-// enableFeedback: false,
-// onPressed: () => _deleteAsking(context, todomodel),
-// // callBackFunction(todomodel),
-// icon: Icon(
-// Icons.delete_outline_sharp,
-// color: Colors.red.withOpacity(0.7),
-// ),
-// ),
-// ],
-// ),
-// ],
-// )
