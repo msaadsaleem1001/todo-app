@@ -124,7 +124,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
             },
             icon: const Padding(
               padding: EdgeInsets.only(right: 10),
-              child: Icon(Icons.clear_all_rounded),
+              child: Icon(Icons.cleaning_services_outlined),
             ),
           ),
         ],
@@ -180,6 +180,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
                       controller: titleController,
                       onChanged: (value) {
                         count++;
+                        _formKey.currentState!.validate();
                       },
                       decoration: InputDecoration(
                         hintText: "Todo title",
@@ -187,11 +188,26 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5.0),
                             borderSide: const BorderSide(
-                              width: 1,
+                              color: Colors.green,
+                              width: 2,
                             )),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide: const BorderSide(
+                            width: 1,
+                          ),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                            color: Colors.red.withOpacity(0.6),
+                            width: 1,
+                          ),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                            color: Colors.red.withOpacity(0.6),
                             width: 1,
                           ),
                         ),
@@ -220,6 +236,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
                           : Colors.grey.shade700,
                       controller: subtitleController,
                       onChanged: (value) {
+                        _formKey.currentState!.validate();
                         count++;
                       },
                       decoration: InputDecoration(
@@ -228,11 +245,26 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5.0),
                             borderSide: const BorderSide(
-                              width: 1,
+                              color: Colors.green,
+                              width: 2,
                             )),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide: const BorderSide(
+                            width: 1,
+                          ),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                            color: Colors.red.withOpacity(0.6),
+                            width: 1,
+                          ),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                            color: Colors.red.withOpacity(0.6),
                             width: 1,
                           ),
                         ),

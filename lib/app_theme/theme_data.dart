@@ -24,6 +24,9 @@ class TodoAppTheme {
       iconColor: Colors.black,
       titleTextStyle: TodoTextTheme.lightTextTheme.displayMedium,
       contentTextStyle: TodoTextTheme.lightTextTheme.displaySmall,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(32)),
+      ),
     ),
     buttonTheme: const ButtonThemeData(
       colorScheme: ColorScheme.light(),
